@@ -1,0 +1,26 @@
+Resource requests and limits are optional parameters specified at the container level. These settings help ensure that an applications run efficiently, prevent resource contention, and maintain overall cluster stability.
+1. Resource requests:
+     Resource requests defines the minimum amount of CPU & Memory resources a pod need to run.
+     when we specify a resource request k8 ensures that the pod is scheduled with at least the resources defined in the request.
+     example- 
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+
+2. Resource limits:
+     Resource limit defines the maximum amount of CPU and Memory resources that can be allocated to that pod.
+     If a container tries to exceed these limits, Kubernetes will either throttle it (for CPU) or terminate it (for memory).
+     example-
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+
+Resource limits and requests are essential for:
+
+- Preventing resource exhaustion: Avoid overloading and protect other applications.
+- Optimizing resource utilization: Efficient allocation and avoid underutilization.
+- Improving cost management: Predictable costs and avoid overspending.
+- Enforcing Quality of service: Prioritize critical applications and control bursting.
+- Facilitating autoscaling: Accurate scaling based on demand.

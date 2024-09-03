@@ -1,0 +1,20 @@
+Ques. Can you explain the benefits of using a virtual environment for python applications?
+
+Benefits of using a virtual environment for Python applications:
+1. Isolation: Creates a separate environment for each project, preventing conflicts between dependencies.
+2. Dependency management: Manages dependencies for each project independently.
+3. Portability: Ensures that projects can be easily moved and shared.
+4. Reproducibility: Creates consistent environments for development and deployment.
+
+---
+
+Ques. Detail how you tested autoscaling and database interactions, including simulating high traffic. Provide results and any issues encountered during testing.
+
+- Tested the autoscaling feature of the application by reducing the target CPU utilization setting of the HPA and saw if the HPA scales the application up to the defined maximum  when CPU utilization exceeds.
+- Used a load testing tool k6 to generate HTTP requests to the Flask application, simulating high traffic.
+- To test database performed basic CRUD operations from the commands provided in the assignment and verify data persistence.
+Issues:
+- Scaling Delays: the autoscaler was slow to react to changes in load, it may lead to performance degradation.
+Results:
+- New pods was created when the cpu utilization exceeded
+- data was successfully inserted and retrived. After deleting and restarting the MongoDB pod, previously inserted data was able to persist. 

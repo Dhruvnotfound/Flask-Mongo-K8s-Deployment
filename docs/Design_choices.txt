@@ -1,0 +1,18 @@
+In designing this Kubernetes deployment for a Flask application with MongoDB, several key decisions were made.
+Below is an explanation of the key design choices i took, along with any alternatives considered and the rationale for not selecting them.
+
+1. Service Types for MongoDB
+- I used `ClusterIP` for the Mongodb to allow access within the Kubernetes cluster without exposing it to the outside world, thus making it more secure.
+- Alternatives like `NodePort` and `LoadBalancer` are not chosen because it would expose MongoDB outside the cluster, which is unnecessary for this internal database.
+
+2. Service Types for Flask application
+- I used `NodePort` for the Flask application to expose it on a specific port of the cluster nodes, making it accessible for external testing purposes.
+- Alternatives like `ClusterIP` and `LoadBalancer` are not chosen because service like ClusterIP will restrict access to within the cluster on the other hand LoadBalancer was considerable but due to the limitation of minikube (as it doesn’t support external LoadBalancers) was not chosen but would be ideal in case of cloud environment.
+
+3. Secrets for MongoDB Credentials
+- I used secrets to store/manage the MongoDB credentials as Secrets provide a secure way to store and manage sensitive information, separating it from the deployment configuration.
+- Environment variables in deployment YAML was not chosen as it would expose the sensitive information in deployment making it a security risk.
+
+4. Only a Single MongoDB Instance
+- I only deployed a single MongoDB instance rather than a replica set because it is easy to manage and less resource heavy as compared to a replica set.
+- A replica set was not chosen as this deployment does not require the high availability, fault tolerance, or read scaling that a replica set would provide. A single MongoDB instance is sufficient to meet the needs of the application, particularly if the application is still in the development or testing phase.
